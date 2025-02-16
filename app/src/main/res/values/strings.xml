@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Ekub</string>
+    <string name="login_illustration"><![CDATA[<string name=\"login_illustration\">Login illustration</string>\n]]></string>
+</resources>
