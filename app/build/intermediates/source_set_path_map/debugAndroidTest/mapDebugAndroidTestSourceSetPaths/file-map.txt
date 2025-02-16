@@ -1,0 +1,6 @@
+com.jerry.ekub.test.app-core-1.5.0-0 C:\Users\HP\.gradle\caches\8.9\transforms\2399e513b6a4d7e11969f961581925e6\transformed\core-1.5.0\res
+com.jerry.ekub.test.app-annotation-experimental-1.4.0-1 C:\Users\HP\.gradle\caches\8.9\transforms\5744718c88983a1251b937adf87eea08\transformed\annotation-experimental-1.4.0\res
+com.jerry.ekub.test.app-androidTest-2 C:\Users\HP\AndroidStudioProjects\Ekub\app\build\generated\res\resValues\androidTest\debug
+com.jerry.ekub.test.app-mergeDebugAndroidTestResources-3 C:\Users\HP\AndroidStudioProjects\Ekub\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.jerry.ekub.test.app-mergeDebugAndroidTestResources-4 C:\Users\HP\AndroidStudioProjects\Ekub\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.jerry.ekub.test.app-debugAndroidTest-5 C:\Users\HP\AndroidStudioProjects\Ekub\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

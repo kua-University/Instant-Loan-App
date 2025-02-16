@@ -1,0 +1,3 @@
+com.jerry.ekub.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme
