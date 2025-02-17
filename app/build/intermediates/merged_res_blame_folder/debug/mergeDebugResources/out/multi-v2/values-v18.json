@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.jerry.ekub.app-mergeDebugResources-41:/values-v18/values-v18.xml",
+            "outputFile": "com.jerry.ekub.app-mergeDebugResources-42:/values-v18/values-v18.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\5edbf466ebe6d66a8b6e8c907e9d351e\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "source": "C:\\Users\\HP\\.gradle\\caches\\8.9\\transforms\\958f4212c476fecc8a109f0bb035096c\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

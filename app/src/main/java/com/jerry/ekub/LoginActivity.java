@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                                     // Navigate to HomeActivity
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     intent.putExtra("USERNAME", username); // Pass the username to HomeActivity
-                                    Log.d("RegistrationActivity", "Username: " + username);
 
                                     startActivity(intent);
                                     finish(); // Close login activity

@@ -2,11 +2,14 @@ package com.jerry.ekub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +17,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView optionsRecyclerView;
     private OptionAdapter optionAdapter;
-    private List<Ekub> allEkubs; // Original list of all Ekubs
-    private List<Ekub> filteredEkubs; // Filtered list for display
+    private List<Ekub> allEkubs; // List of all Ekubs
     private TextView welcomeMessage;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Initialize Firestore
+        db = FirebaseFirestore.getInstance();
 
         // Initialize UI components
         optionsRecyclerView = findViewById(R.id.optionsRecyclerView);
@@ -36,51 +42,46 @@ public class HomeActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         optionsRecyclerView.setLayoutManager(gridLayoutManager);
 
-        // Create a list of Ekubs (you can customize this later)
+        // Initialize list
         allEkubs = new ArrayList<>();
-        allEkubs.add(new Ekub("Top Ekub 1", 100, 10, "Top", "2023-12-31"));
-        allEkubs.add(new Ekub("Daily Ekub 1", 50, 5, "Daily", "2023-11-15"));
-        allEkubs.add(new Ekub("Weekly Ekub 1", 200, 20, "Weekly", "2023-12-01"));
-        allEkubs.add(new Ekub("Monthly Ekub 1", 500, 50, "Monthly", "2024-01-01"));
-
-        // Initially, show all Ekubs
-        filteredEkubs = new ArrayList<>(allEkubs);
 
         // Set up the adapter
-        optionAdapter = new OptionAdapter(filteredEkubs, this);
+        optionAdapter = new OptionAdapter(allEkubs, this, this::onEkubClick);
         optionsRecyclerView.setAdapter(optionAdapter);
 
-        // Handle Top link click
-        Button topLink = findViewById(R.id.topLink);
-        topLink.setOnClickListener(v -> filterEkubs("Top"));
-
-        // Handle Daily link click
-        Button dailyLink = findViewById(R.id.dailyLink);
-        dailyLink.setOnClickListener(v -> filterEkubs("Daily"));
-
-        // Handle Weekly link click
-        Button weeklyLink = findViewById(R.id.weeklyLink);
-        weeklyLink.setOnClickListener(v -> filterEkubs("Weekly"));
-
-        // Handle Monthly link click
-        Button monthlyLink = findViewById(R.id.monthlyLink);
-        monthlyLink.setOnClickListener(v -> filterEkubs("Monthly"));
+        // Fetch Ekubs from Firestore
+        fetchEkubsFromFirestore();
 
         // Handle Profile link click
         TextView profileLink = findViewById(R.id.profileLink);
         profileLink.setOnClickListener(v -> {
-            // Navigate to ProfileActivity and pass user details
-            Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
-            profileIntent.putExtra("NAME", "Asfaw Yemane");
-            profileIntent.putExtra("EMAIL", "asfawyemane21@gmail.com");
-            profileIntent.putExtra("PHONE", "+0988492462");
-            profileIntent.putExtra("ADDRESS", "Hawelti, Mekelle, Ethiopia");
-            startActivity(profileIntent);
-        });
+            String userEmail = intent.getStringExtra("USERNAME");
 
-        // Handle Home button click
-        Button homeButton = findViewById(R.id.homeButton);
-        homeButton.setOnClickListener(v -> filterEkubs("All"));
+            // Fetch user data from Firestore
+            db.collection("users")
+                    .whereEqualTo("email", userEmail)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String firstName = document.getString("firstName");
+                                String lastName = document.getString("lastName");
+                                String email = document.getString("email");
+                                String phone = document.getString("phone");
+
+                                // Navigate to ProfileActivity
+                                Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
+                                profileIntent.putExtra("NAME", firstName);
+                                profileIntent.putExtra("LastName", lastName);
+                                profileIntent.putExtra("EMAIL", email);
+                                profileIntent.putExtra("PHONE", phone);
+                                startActivity(profileIntent);
+                            }
+                        } else {
+                            Log.e("FirestoreError", "Error fetching user data", task.getException());
+                        }
+                    });
+        });
 
         // Handle Logout button click
         Button logoutButton = findViewById(R.id.logoutButton);
@@ -91,14 +92,48 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    // Method to filter Ekubs based on the selected category
-    private void filterEkubs(String category) {
-        filteredEkubs.clear();
-        for (Ekub ekub : allEkubs) {
-            if (category.equals("All") || ekub.getType().equals(category)) {
-                filteredEkubs.add(ekub);
-            }
-        }
-        optionAdapter.notifyDataSetChanged(); // Refresh the RecyclerView
+    // Fetch Ekubs from Firestore (No Filtering)
+    private void fetchEkubsFromFirestore() {
+        db.collection("Ekubs")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        allEkubs.clear();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            try {
+                                Ekub ekub = document.toObject(Ekub.class);
+
+                                // Manually convert amount if necessary
+                                Object amountObj = document.get("amount");
+                                if (amountObj instanceof String) {
+                                    ekub.setAmount(Integer.parseInt((String) amountObj));
+                                } else if (amountObj instanceof Long) {
+                                    ekub.setAmount(((Long) amountObj).intValue());
+                                }
+
+                                allEkubs.add(ekub);
+                            } catch (Exception e) {
+                                Log.e("FirestoreError", "Error parsing Ekub data", e);
+                            }
+                        }
+                        optionAdapter.notifyDataSetChanged(); // Refresh RecyclerView
+                    }
+                });
+        // Inside HomeActivity's onCreate method
+        Button ekubateyButton = findViewById(R.id.ekubateyButton);
+        ekubateyButton.setOnClickListener(v -> {
+            Intent ekubateyIntent = new Intent(HomeActivity.this, EkubateyActivity.class);
+            startActivity(ekubateyIntent);
+        });
+
     }
-}
+        // Handle Ekub item click
+        private void onEkubClick(int position) {
+            Ekub ekub = allEkubs.get(position);
+            Intent detailsIntent = new Intent(HomeActivity.this, EkubDetailsActivity.class);
+            detailsIntent.putExtra("EKUB", ekub); // Pass the selected Ekub object
+            startActivity(detailsIntent);
+        }
+
+
+    }

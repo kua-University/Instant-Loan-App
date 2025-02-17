@@ -38,7 +38,9 @@
     <activity android:name=".ProfileActivity" />
 
     <!-- Ekub Detail Activity -->
-    <activity android:name=".EkubDetailActivity" />
+    <activity android:name=".EkubDetailsActivity" />
+        <activity android:name=".EkubateyActivity"/>
+
 
 </application>
 

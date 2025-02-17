@@ -29,6 +29,7 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
+
         <!-- Email -->
         <TextView
             android:id="@+id/emailTextView"
@@ -57,17 +58,6 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <!-- Address -->
-        <TextView
-            android:id="@+id/addressTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:drawableStart="@drawable/ic_location"
-            android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:text="Address:"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

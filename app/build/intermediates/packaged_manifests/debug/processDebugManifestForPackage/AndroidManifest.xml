@@ -56,7 +56,8 @@
         <activity android:name="com.jerry.ekub.ProfileActivity" />
 
         <!-- Ekub Detail Activity -->
-        <activity android:name="com.jerry.ekub.EkubDetailActivity" />
+        <activity android:name="com.jerry.ekub.EkubDetailsActivity" />
+        <activity android:name="com.jerry.ekub.EkubateyActivity" />
         <activity
             android:name="com.google.firebase.auth.internal.GenericIdpActivity"
             android:excludeFromRecents="true"

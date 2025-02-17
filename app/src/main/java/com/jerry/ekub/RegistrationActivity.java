@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText usernameEditText, passwordEditText, rePasswordEditText, firstNameEditText, lastNameEditText, phoneEditText;
+    private EditText emailEditText, passwordEditText, rePasswordEditText, firstNameEditText, lastNameEditText, phoneEditText;
     private Button registerButton;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -27,7 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         // Initialize UI components
-        usernameEditText = findViewById(R.id.username);
+        emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         rePasswordEditText = findViewById(R.id.rePassword);
         firstNameEditText = findViewById(R.id.firstName);
@@ -43,20 +43,22 @@ public class RegistrationActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim();
+                String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String rePassword = rePasswordEditText.getText().toString().trim();
                 String firstName = firstNameEditText.getText().toString().trim();
                 String lastName = lastNameEditText.getText().toString().trim();
                 String phone = phoneEditText.getText().toString().trim();
 
-                if (username.isEmpty() || password.isEmpty() || rePassword.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
+                if (email.isEmpty() || password.isEmpty() || rePassword.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(RegistrationActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(RegistrationActivity.this, "Invalid email format", Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(rePassword)) {
                     Toast.makeText(RegistrationActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 } else {
                     // Create user with Firebase Authentication
-                    mAuth.createUserWithEmailAndPassword(username, password)
+                    mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(RegistrationActivity.this, task -> {
                                 if (task.isSuccessful()) {
                                     // Registration successful
@@ -67,6 +69,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     userData.put("firstName", firstName);
                                     userData.put("lastName", lastName);
                                     userData.put("phone", phone);
+                                    userData.put("email", email);
 
                                     db.collection("users").document(user.getUid())
                                             .set(userData)

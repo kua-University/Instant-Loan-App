@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.jerry.ekub"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.jerry.ekub"
@@ -26,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -33,20 +34,26 @@ android {
 }
 
 dependencies {
-
+    // AndroidX and Material Design
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.contentpager)
-    implementation(libs.room.common)
+    implementation(libs.recyclerview)
+
+    // Room Database
     implementation(libs.room.runtime)
-    implementation(libs.support.annotations)
+    annotationProcessor(libs.room.compiler)
+
+    // Firebase
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.database)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    annotationProcessor(libs.room.compiler)
+
+
 }

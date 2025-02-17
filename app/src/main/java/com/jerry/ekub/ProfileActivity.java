@@ -7,28 +7,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private TextView nameTextView;
+    private TextView emailTextView;
+    private TextView phoneTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         // Initialize UI components
-        TextView nameTextView = findViewById(R.id.nameTextView);
-        TextView emailTextView = findViewById(R.id.emailTextView);
-        TextView phoneTextView = findViewById(R.id.phoneTextView);
-        TextView addressTextView = findViewById(R.id.addressTextView);
+        nameTextView = findViewById(R.id.nameTextView);
+        emailTextView = findViewById(R.id.emailTextView);
+        phoneTextView = findViewById(R.id.phoneTextView);
 
-        // Get user details from the intent
+        // Retrieve user details from the intent
         Intent intent = getIntent();
         String name = intent.getStringExtra("NAME");
         String email = intent.getStringExtra("EMAIL");
         String phone = intent.getStringExtra("PHONE");
-        String address = intent.getStringExtra("ADDRESS");
 
         // Display user details
-        nameTextView.setText("Name: " + name);
-        emailTextView.setText("Email: " + email);
-        phoneTextView.setText("Phone: " + phone);
-        addressTextView.setText("Address: " + address);
+        nameTextView.setText(name);
+        emailTextView.setText(email);
+        phoneTextView.setText(phone);
     }
 }

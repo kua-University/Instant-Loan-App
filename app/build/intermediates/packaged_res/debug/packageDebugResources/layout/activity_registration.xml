@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,25 +16,25 @@
         android:layout_height="wrap_content"
         android:text="First Name"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/firstName"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         android:hint="Enter First Name"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
-        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/firstNameLabel" />
+        app:layout_constraintTop_toBottomOf="@id/firstNameLabel"
+        android:layout_marginTop="4dp" />
 
     <!-- Last Name -->
     <TextView
@@ -42,9 +43,8 @@
         android:layout_height="wrap_content"
         android:text="Last Name"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/firstName"
         android:layout_marginTop="16dp" />
@@ -52,16 +52,17 @@
     <EditText
         android:id="@+id/lastName"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         android:hint="Enter Last Name"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
-        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lastNameLabel" />
+        app:layout_constraintTop_toBottomOf="@id/lastNameLabel"
+        android:layout_marginTop="4dp" />
 
     <!-- Phone Number -->
     <TextView
@@ -70,9 +71,8 @@
         android:layout_height="wrap_content"
         android:text="Phone Number"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_phone"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lastName"
         android:layout_marginTop="16dp" />
@@ -80,45 +80,47 @@
     <EditText
         android:id="@+id/phoneNumber"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         android:hint="Enter Phone Number"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
         android:inputType="phone"
-        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneLabel" />
+        app:layout_constraintTop_toBottomOf="@id/phoneLabel"
+        android:layout_marginTop="4dp" />
 
-    <!-- Username -->
+    <!-- Email -->
     <TextView
-        android:id="@+id/usernameLabel"
+        android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="Email"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_account"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phoneNumber"
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
-        android:hint="Enter Username"
+        android:hint="Enter Email"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
-        android:background="@drawable/edittext_background"
+        android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usernameLabel" />
+        app:layout_constraintTop_toBottomOf="@id/emailLabel"
+        android:layout_marginTop="4dp" />
 
     <!-- Password -->
     <TextView
@@ -127,27 +129,27 @@
         android:layout_height="wrap_content"
         android:text="Password"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintTop_toBottomOf="@id/email"
         android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         android:hint="Enter Password"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
         android:inputType="textPassword"
-        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordLabel" />
+        app:layout_constraintTop_toBottomOf="@id/passwordLabel"
+        android:layout_marginTop="4dp" />
 
     <!-- Re-enter Password -->
     <TextView
@@ -156,9 +158,8 @@
         android:layout_height="wrap_content"
         android:text="Re-enter Password"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="#000000"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password"
         android:layout_marginTop="16dp" />
@@ -166,30 +167,30 @@
     <EditText
         android:id="@+id/rePassword"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
         android:padding="12dp"
         android:hint="Re-enter Password"
+        android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#757575"
         android:inputType="textPassword"
-        android:background="@drawable/edittext_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rePasswordLabel" />
+        app:layout_constraintTop_toBottomOf="@id/rePasswordLabel"
+        android:layout_marginTop="4dp" />
 
     <!-- Register Button -->
     <Button
         android:id="@+id/registerButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#4CAF50"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_button"
         android:elevation="4dp"
-        android:padding="16dp"
         android:text="Register"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:drawableStart="@drawable/ic_check"
-        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rePassword"
