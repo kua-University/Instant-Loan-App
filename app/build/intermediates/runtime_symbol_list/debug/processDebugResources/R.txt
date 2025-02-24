@@ -1438,6 +1438,7 @@ int color foreground_material_light 0x7f05006d
 int color header_color 0x7f05006e
 int color highlighted_text_material_dark 0x7f05006f
 int color highlighted_text_material_light 0x7f050070
+int color light_gray 0x7f0502fb
 int color links_background 0x7f050071
 int color m3_appbar_overlay_color 0x7f050072
 int color m3_assist_chip_icon_tint_color 0x7f050073
@@ -3226,6 +3227,7 @@ int id browser_actions_menu_view 0x7f08006a
 int id buttonPanel 0x7f08006b
 int id cache_measures 0x7f08006c
 int id callMeasure 0x7f08006d
+int id cancelButton 0x7f080228
 int id cancel_button 0x7f08006e
 int id carryVelocity 0x7f08006f
 int id center 0x7f080070
